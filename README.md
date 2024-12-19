@@ -1,11 +1,11 @@
-<div style="text-align: center;margin-bottom: 16px">
+<p align="center">
   <img
     src="./assets/lambda.svg"
     width="200px"
     height="200px"
     alt="lambda-function"
   />
-</div>
+</p>
 
 # AWS Lambda
 
@@ -84,6 +84,16 @@ A função lambda que existe dentro do container recentemente criado pode ser in
 ```
 
 Outros clientes como postman, insomnia ou mesmo webhooks também podem ser utilizados.
+
+**Integrando com Outros Serviços:**
+
+Para integrar a função lambda com outros serviços da AWS, considere utilizar o Localstack. O Localstack é uma ferramenta que simula o ambiente da AWS em um ambiente local, permitindo a execução de serviços como S3, SQS, SNS, DynamoDB, entre outros. Para mais informações sobre o Localstack, acesse o [repositório oficial](https://github.com/localstack/localstack).
+
+O repositorio contém um arquivo `docker-compose.yml` que pode ser utilizado para subir um ambiente local com o Localstack e o container da função lambda. Para subir o ambiente, execute o comando:
+
+```shell
+  docker-compose up
+```
 
 **Referências:**
 
