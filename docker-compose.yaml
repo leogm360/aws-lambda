@@ -1,0 +1,37 @@
+services:
+  lambda:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lambda
+    ports:
+      - '9000:9000'
+    env_file:
+      - .env
+    volumes:
+      - './dist:/var/task'
+    networks:
+      - lambda-network
+
+  localstack:
+    image: localstack/localstack:4.0.3
+    container_name: localstack
+    ports:
+      # access using localstack webapp: https://app.localstack.cloud/
+      - '127.0.0.1:4566:4566'
+      - '127.0.0.1:4510-4559:4510-4559'
+    environment:
+      # mais em: https://docs.localstack.cloud/references/configuration/
+      - SERVICES=s3,sqs,apigateway
+      - DEBUG=${DEBUG:-0}
+      - CLEAR_TMP_FOLDER=0
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - './localstack:/tmp/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - lambda-network
+
+networks:
+  lambda-network:
+    driver: bridge
